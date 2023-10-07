@@ -8,12 +8,20 @@ import (
 	"time"
 )
 
+type Product struct {
+	ID        int32     `json:"id"`
+	Name      string    `json:"name"`
+	Price     int32     `json:"price"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
 type User struct {
-	ID        int32
-	Name      string
-	Email     string
-	Password  string
-	Role      string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID        int32     `json:"id"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
+	Role      string    `json:"role"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
