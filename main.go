@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/joho/godotenv"
@@ -18,9 +19,8 @@ func init() {
 // migrate create -ext sql -dir db/migrations -seq create_product_table
 // migrate -path db/migrations/ -database $POSTGRESQL_URL up
 func main() {
-
+	CheckBuckets(context.Background())
 	e := echo.New()
-
 	e.POST("/product", AddProduct)
 
 	e.POST("/file", Addfile)

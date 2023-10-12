@@ -21,7 +21,9 @@ func Addfile(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 	defer src.Close()
-
+	Putfile(c.Request().Context(), src, file.Size, file.Filename)
+	url := GetFileURL(c, file.Filename)
+	fmt.Println(url)
 	dst, err := os.Create(file.Filename)
 	if err != nil {
 		fmt.Println(err)
@@ -35,4 +37,13 @@ func Addfile(c echo.Context) error {
 	}
 
 	return c.NoContent(http.StatusOK)
+}
+
+func GetFileURL(c echo.Context, file_name string) string {
+	url, err := GeneratePresignedURL(c.Request().Context(), file_name)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	return url
 }
